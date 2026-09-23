@@ -1,0 +1,344 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Yinwell Acupressure Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yuji+Syuku&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --paper:#efe6d2; --card:#f8f2e3; --card-line:#dccaa0;
+  --ink:#2a231b; --ink-soft:#5d5040; --muted:#8a7c65;
+  --indigo:#28344a; --indigo-soft:#e7ebf1;
+  --brass:#9c6f22; --brass-soft:#f1e2bd;
+  --seal:#a03329; --seal-soft:#f2dcd6;
+  --line:#d9c69e;
+  --shadow:0 1px 2px rgba(42,35,27,.06), 0 14px 32px -18px rgba(42,35,27,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1a1611; --card:#242019; --card-line:#3c3225;
+    --ink:#ece2cd; --ink-soft:#b6a888; --muted:#8b7d63;
+    --indigo:#8ea4cc; --indigo-soft:#232a38;
+    --brass:#d9ab5c; --brass-soft:#332a17;
+    --seal:#d97b6f; --seal-soft:#3a211d;
+    --line:#3c3225;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 36px -18px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1a1611; --card:#242019; --card-line:#3c3225;
+  --ink:#ece2cd; --ink-soft:#b6a888; --muted:#8b7d63;
+  --indigo:#8ea4cc; --indigo-soft:#232a38;
+  --brass:#d9ab5c; --brass-soft:#332a17;
+  --seal:#d97b6f; --seal-soft:#3a211d;
+  --line:#3c3225;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 16px 36px -18px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Work Sans",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  line-height:1.55; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:560px; margin:0 auto; padding:24px 20px 70px; min-height:100vh; display:flex; flex-direction:column;}
+@media(min-width:640px){.wrap{padding:40px 24px 90px;}}
+
+.brandbar{display:flex; justify-content:space-between; align-items:center; margin-bottom:22px;}
+.brand{font-family:"Yuji Syuku",serif; font-size:1rem;}
+.theme-btn{border:1px solid var(--line); background:var(--card); color:var(--ink-soft);
+  border-radius:999px; padding:6px 13px; font-size:.72rem; cursor:pointer; font-family:inherit;}
+
+.progress-track{height:5px; background:var(--card-line); border-radius:999px; overflow:hidden; margin-bottom:28px;}
+.progress-fill{height:100%; background:var(--brass); border-radius:999px; transition:width .35s ease; width:0%;}
+
+.stage{display:none; flex:1; flex-direction:column;}
+.stage.active{display:flex;}
+
+.eyebrow{font-family:"IBM Plex Mono",monospace; font-size:.68rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--brass); margin-bottom:10px;}
+h1{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.9rem; line-height:1.2; margin:0 0 14px; text-wrap:balance;}
+@media(min-width:560px){h1{font-size:2.3rem;}}
+.sub{font-size:1rem; color:var(--ink-soft); max-width:44ch; margin:0 0 26px;}
+
+.q-title{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.5rem; margin:0 0 22px; text-wrap:balance;}
+.options{display:flex; flex-direction:column; gap:10px; margin-bottom:auto;}
+.opt{border:1px solid var(--line); background:var(--card); border-radius:12px; padding:15px 17px;
+  font:inherit; font-size:.96rem; color:var(--ink); text-align:left; cursor:pointer; box-shadow:var(--shadow);}
+.opt:hover{border-color:var(--brass);}
+.opt.selected{border-color:var(--brass); background:var(--brass-soft);}
+
+.nav-row{display:flex; justify-content:space-between; align-items:center; margin-top:24px;}
+.back-btn{background:none; border:none; color:var(--muted); font:inherit; font-size:.85rem; cursor:pointer;
+  padding:8px 4px;}
+.big-cta{display:block; width:100%; border:none; border-radius:12px; background:var(--seal); color:#fff;
+  font:inherit; font-weight:600; font-size:1.02rem; padding:16px 20px; cursor:pointer; text-decoration:none;
+  text-align:center; margin-top:8px;}
+.big-cta:hover{opacity:.92;}
+.big-cta.secondary{background:var(--indigo);}
+
+.result-card{background:var(--card); border:1px solid var(--card-line); border-radius:16px; box-shadow:var(--shadow);
+  padding:24px 22px; margin-bottom:18px;}
+.result-point{font-family:"Yuji Syuku",serif; font-size:1.7rem; margin:6px 0 4px;}
+.result-loc{font-family:"IBM Plex Mono",monospace; font-size:.78rem; color:var(--muted); margin-bottom:14px;}
+.result-desc{font-size:.94rem; color:var(--ink-soft); margin:0;}
+
+.reveal-card{background:var(--indigo-soft); border:1px solid var(--card-line); border-radius:14px;
+  padding:18px 20px; margin-bottom:18px; font-size:.9rem; color:var(--ink);}
+.reveal-card b{color:var(--indigo);}
+
+.bridge-card{font-family:"Yuji Syuku",serif; font-size:1.15rem; line-height:1.5; color:var(--ink);
+  text-align:center; margin:4px 0 18px; text-wrap:balance;}
+.bridge-card b{color:var(--seal);}
+
+.offer{border:1px solid var(--card-line); background:var(--card); border-radius:16px; box-shadow:var(--shadow);
+  padding:24px 20px; text-align:center;}
+.price-row{display:flex; align-items:baseline; justify-content:center; gap:12px; margin:6px 0 4px;}
+.was{font-family:"IBM Plex Mono",monospace; color:var(--muted); text-decoration:line-through; font-size:1.1rem;}
+.now{font-family:"IBM Plex Mono",monospace; color:var(--seal); font-size:2.2rem; font-weight:600;
+  font-variant-numeric:tabular-nums;}
+.price-note{font-size:.76rem; color:var(--muted); margin-bottom:16px;}
+.timer-label{font-family:"IBM Plex Mono",monospace; font-size:.66rem; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--seal); margin-bottom:6px;}
+.timer{font-family:"IBM Plex Mono",monospace; font-size:1.5rem; font-weight:600; font-variant-numeric:tabular-nums;
+  color:var(--ink); background:var(--seal-soft); display:inline-block; padding:7px 18px; border-radius:10px;
+  margin-bottom:18px;}
+.included{list-style:none; padding:0; margin:0 0 18px; text-align:left; font-size:.86rem; color:var(--ink-soft);}
+.included li{padding:5px 0; border-top:1px solid var(--line);}
+.included li:first-child{border-top:none;}
+.included .mark{color:var(--brass); font-family:"IBM Plex Mono",monospace; margin-right:8px;}
+.disclaimer{font-size:.7rem; color:var(--muted); text-align:center; margin-top:24px; line-height:1.6;}
+</style>
+
+<div class="wrap">
+  <div class="brandbar">
+    <div class="brand">Yinwell</div>
+    <button class="theme-btn" id="themeBtn">theme</button>
+  </div>
+
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+
+  <!-- Intro -->
+  <div class="stage active" data-stage="intro">
+    <div class="eyebrow">2-Minute Quiz</div>
+    <h1>Which Acupressure Points Are Right for You?</h1>
+    <p class="sub">Answer 4 quick questions and get the exact points mapped to what you're feeling right now — based on Traditional Chinese Medicine.</p>
+    <button class="big-cta" id="startBtn">Start the Quiz</button>
+  </div>
+
+  <!-- Q1 -->
+  <div class="stage" data-stage="q1">
+    <div class="eyebrow">Question 1 of 4</div>
+    <div class="q-title">What's bothering you the most lately?</div>
+    <div class="options" data-q="symptom">
+      <button class="opt" data-value="sleep">Sleep</button>
+      <button class="opt" data-value="heat">Body heat (hot flashes, night sweats)</button>
+      <button class="opt" data-value="fog">Focus / mental clarity</button>
+      <button class="opt" data-value="anxious">Stress / anxiety</button>
+      <button class="opt" data-value="skin">Skin (itching, irritation)</button>
+    </div>
+    <div class="nav-row"><button class="back-btn" data-back="intro">← Back</button><span></span></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="stage" data-stage="q2">
+    <div class="eyebrow">Question 2 of 4</div>
+    <div class="q-title">How long has this been going on?</div>
+    <div class="options" data-q="duration">
+      <button class="opt" data-value="weeks">A few weeks</button>
+      <button class="opt" data-value="months">A few months</button>
+      <button class="opt" data-value="year">Over a year</button>
+    </div>
+    <div class="nav-row"><button class="back-btn" data-back="q1">← Back</button><span></span></div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="stage" data-stage="q3">
+    <div class="eyebrow">Question 3 of 4</div>
+    <div class="q-title">What's your age range?</div>
+    <div class="options" data-q="age">
+      <button class="opt" data-value="under35">Under 35</button>
+      <button class="opt" data-value="35-44">35-44</button>
+      <button class="opt" data-value="45-55">45-55</button>
+      <button class="opt" data-value="55plus">55+</button>
+    </div>
+    <div class="nav-row"><button class="back-btn" data-back="q2">← Back</button><span></span></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="stage" data-stage="q4">
+    <div class="eyebrow">Question 4 of 4</div>
+    <div class="q-title">How much is this affecting your daily life?</div>
+    <div class="options" data-q="impact">
+      <button class="opt" data-value="little">A little</button>
+      <button class="opt" data-value="lot">Quite a bit</button>
+      <button class="opt" data-value="takeover">It's taking over</button>
+    </div>
+    <div class="nav-row"><button class="back-btn" data-back="q3">← Back</button><span></span></div>
+  </div>
+
+  <!-- Result -->
+  <div class="stage" data-stage="result">
+    <div class="eyebrow">Your Diagnostic Result</div>
+    <h1 id="resultHeadline" style="font-size:1.5rem;">Your trigger point</h1>
+
+    <div class="result-card">
+      <div class="eyebrow" style="margin-bottom:0;">Your #1 trigger point</div>
+      <div class="result-point" id="resultPointName">—</div>
+      <div class="result-loc" id="resultPointLoc">—</div>
+      <p class="result-desc" id="resultPointDesc">—</p>
+    </div>
+
+    <div class="reveal-card" id="revealCard" hidden></div>
+
+    <div class="bridge-card" id="bridgeCard"></div>
+
+    <div class="offer">
+      <div class="eyebrow" style="text-align:center;">Your Personalized 15-Day Plan</div>
+      <div class="price-row">
+        <span class="was">$29.90</span>
+        <span class="now">$9.90</span>
+      </div>
+      <p class="price-note">One-time payment · instant digital access</p>
+      <div class="timer-label">Price held for</div>
+      <div class="timer" id="timer">05:00</div>
+      <ul class="included">
+        <li><span class="mark">·</span> Your 15-day combination plan, built from your answers</li>
+        <li><span class="mark">·</span> All 15 points — location + function, with how-to photos</li>
+        <li><span class="mark">·</span> Daily streak tracker, 1-3 minutes a day, no equipment</li>
+      </ul>
+      <a class="big-cta" id="ctaBtn" href="https://buy.stripe.com/4gM7sK7m74Vv31ffXI1wY01" target="_blank" rel="noopener">Get My 15-Day Plan — $9.90</a>
+      <p class="price-note" style="margin:12px 0 0;">7-day money-back guarantee</p>
+    </div>
+
+    <p class="disclaimer">For educational and wellness purposes only. Not a substitute for professional medical advice, diagnosis, or treatment. © Yinwell.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- funnel tracking beacon (Google Apps Script Web App) ----
+  var BEACON_URL = "https://script.google.com/macros/s/AKfycbyczXB6NQxo8XX5hJEmfmWDDr98AJ4DiEF7Tky29VQNgIz9n58QtZkk7Yl50aw7jcM_/exec";
+  var sid;
+  try{
+    sid = sessionStorage.getItem("yw:sid");
+    if(!sid){ sid = "S" + Date.now() + Math.random().toString(36).slice(2,8); sessionStorage.setItem("yw:sid", sid); }
+  }catch(e){ sid = "S" + Date.now() + Math.random().toString(36).slice(2,8); }
+  function beacon(evt, detail){
+    try{
+      fetch(BEACON_URL, { method:"POST", mode:"no-cors", body: JSON.stringify({sid:sid, evt:evt, detail:detail||""}) });
+    }catch(e){}
+  }
+  beacon("landed");
+
+  var answers = {};
+  var order = ["intro","q1","q2","q3","q4","result"];
+
+  var POINTS = {
+    sleep:{name:"Taiyang", loc:"Temple", desc:"Calms the mind and nervous system, easing insomnia and racing thoughts before bed."},
+    heat:{name:"Taixi", loc:"Inner ankle, behind the ankle bone", desc:"Cools excess heat in the body and helps balance hormones, easing hot flashes and night sweats."},
+    fog:{name:"Bai Hui", loc:"Crown of the head", desc:"Lifts the body's energy (Qi) upward, helping clear brain fog and restore mental clarity."},
+    anxious:{name:"Shenmen", loc:"Wrist crease, pinky side", desc:"Calms a racing mind and eases anxiety, helping you feel grounded in minutes."},
+    skin:{name:"Xuehai", loc:"Above the inner knee, on the thigh", desc:"Cools the blood and reduces skin irritation, easing dryness-related itching."}
+  };
+
+  function showStage(id){
+    document.querySelectorAll(".stage").forEach(function(s){
+      s.classList.toggle("active", s.dataset.stage === id);
+    });
+    var idx = order.indexOf(id);
+    var pct = Math.round((idx / (order.length-1)) * 100);
+    document.getElementById("progressFill").style.width = pct + "%";
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  document.getElementById("startBtn").onclick = function(){ beacon("quiz_started"); showStage("q1"); };
+
+  document.querySelectorAll("[data-back]").forEach(function(btn){
+    btn.onclick = function(){ showStage(btn.dataset.back); };
+  });
+
+  document.querySelectorAll(".options").forEach(function(group){
+    var qKey = group.dataset.q;
+    group.querySelectorAll(".opt").forEach(function(opt){
+      opt.onclick = function(){
+        group.querySelectorAll(".opt").forEach(function(o){ o.classList.remove("selected"); });
+        opt.classList.add("selected");
+        answers[qKey] = opt.dataset.value;
+        beacon("answered_" + qKey, opt.dataset.value);
+        setTimeout(function(){
+          var stageEl = group.closest(".stage");
+          var curId = stageEl.dataset.stage;
+          var idx = order.indexOf(curId);
+          if(order[idx+1] === "result"){
+            buildResult();
+          }
+          showStage(order[idx+1]);
+        }, 220);
+      };
+    });
+  });
+
+  function buildResult(){
+    var p = POINTS[answers.symptom] || POINTS.sleep;
+    document.getElementById("resultPointName").textContent = p.name;
+    document.getElementById("resultPointLoc").textContent = p.loc;
+    document.getElementById("resultPointDesc").textContent = p.desc;
+
+    var headline = "Your trigger point: " + p.name;
+    document.getElementById("resultHeadline").textContent = headline;
+
+    var revealEl = document.getElementById("revealCard");
+    var isMidlife = (answers.age === "35-44" || answers.age === "45-55");
+    var hormonalSymptom = (answers.symptom === "heat" || answers.symptom === "sleep" || answers.symptom === "fog");
+    if(isMidlife && hormonalSymptom && (answers.duration === "months" || answers.duration === "year")){
+      revealEl.hidden = false;
+      revealEl.innerHTML = "<b>This combination is common during perimenopause</b> — the transition years before menopause, when symptoms like this often show up before periods even change. You're not imagining it.";
+    } else {
+      revealEl.hidden = true;
+    }
+
+    var bridgeEl = document.getElementById("bridgeCard");
+    bridgeEl.innerHTML = "<b>"+p.name+"</b> is your #1 trigger point — but on its own, one point rarely tells the whole story. In just <b>15 days</b>, combining it with a few more points mapped to your answers can mean deeper sleep, a calmer mind, and real relief.";
+
+    beacon("result_shown", p.name);
+  }
+
+  document.getElementById("ctaBtn").addEventListener("click", function(){ beacon("cta_clicked"); });
+
+  var tb = document.getElementById("themeBtn");
+  tb.onclick = function(){
+    var cur = document.documentElement.getAttribute("data-theme");
+    var md = window.matchMedia && window.matchMedia("(prefers-color-scheme:dark)").matches;
+    var nx = cur ? (cur === "dark" ? "light" : "dark") : (md ? "light" : "dark");
+    document.documentElement.setAttribute("data-theme", nx);
+    try{ sessionStorage.setItem("yw:theme", nx); }catch(e){}
+  };
+  try{
+    var saved = sessionStorage.getItem("yw:theme");
+    if(saved) document.documentElement.setAttribute("data-theme", saved);
+  }catch(e){}
+
+  var DURATION = 5*60;
+  var key = "yw:timerEnd";
+  var end;
+  try{
+    var stored = sessionStorage.getItem(key);
+    end = stored ? parseInt(stored,10) : (Date.now() + DURATION*1000);
+    if(!stored) sessionStorage.setItem(key, String(end));
+  }catch(e){
+    end = Date.now() + DURATION*1000;
+  }
+  var el = document.getElementById("timer");
+  function tick(){
+    var left = Math.max(0, Math.round((end - Date.now())/1000));
+    var m = Math.floor(left/60), s = left%60;
+    el.textContent = String(m).padStart(2,"0") + ":" + String(s).padStart(2,"0");
+    if(left <= 0){ clearInterval(h); el.textContent = "00:00"; }
+  }
+  tick();
+  var h = setInterval(tick, 1000);
+})();
+</script>
+
+</body></html>
