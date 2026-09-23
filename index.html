@@ -133,6 +133,9 @@ h1{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.9rem; line-heigh
       <button class="opt" data-value="heat">Body heat (hot flashes, night sweats)</button>
       <button class="opt" data-value="fog">Focus / mental clarity</button>
       <button class="opt" data-value="anxious">Stress / anxiety</button>
+      <button class="opt" data-value="neck">Headaches / neck tension</button>
+      <button class="opt" data-value="ears">Ringing in the ears</button>
+      <button class="opt" data-value="energy">Low energy / tiredness</button>
       <button class="opt" data-value="skin">Skin (itching, irritation)</button>
     </div>
     <div class="nav-row"><button class="back-btn" data-back="intro">← Back</button><span></span></div>
@@ -151,8 +154,6 @@ h1{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.9rem; line-heigh
       <p class="result-desc" id="resultPointDesc">—</p>
       <p class="result-desc" style="margin-top:12px"><b>Try it now:</b> press firmly with your fingertip for 60 seconds while breathing slowly. Repeat on both sides.</p>
     </div>
-
-    <div class="reveal-card" id="revealCard" hidden></div>
 
     <div class="bridge-card" id="bridgeCard"></div>
 
@@ -204,6 +205,9 @@ h1{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.9rem; line-heigh
     heat:{name:"Taixi", loc:"Inner ankle, behind the ankle bone", desc:"Cools excess heat in the body and helps balance hormones, easing hot flashes and night sweats."},
     fog:{name:"Bai Hui", loc:"Crown of the head", desc:"Lifts the body's energy (Qi) upward, helping clear brain fog and restore mental clarity."},
     anxious:{name:"Shenmen", loc:"Wrist crease, pinky side", desc:"Calms a racing mind and eases anxiety, helping you feel grounded in minutes."},
+    neck:{name:"Fengchi", loc:"Base of the skull, in the hollow on each side of the neck", desc:"Traditionally used to release tension in the neck and shoulders and ease headaches."},
+    ears:{name:"Tinggong", loc:"In front of the ear, in the small hollow that opens when you open your mouth", desc:"Traditionally used to support the ears, easing ringing and a feeling of pressure."},
+    energy:{name:"Zusanli", loc:"Below the knee, about four finger-widths under the kneecap, just outside the shinbone", desc:"Traditionally used to lift the body's energy (Qi) and ease tiredness and low stamina."},
     skin:{name:"Xuehai", loc:"Above the inner knee, on the thigh", desc:"Cools the blood and reduces skin irritation, easing dryness-related itching."}
   };
 
@@ -252,15 +256,6 @@ h1{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.9rem; line-heigh
 
     var headline = "Your trigger point: " + p.name;
     document.getElementById("resultHeadline").textContent = headline;
-
-    var revealEl = document.getElementById("revealCard");
-    var hormonalSymptom = (answers.symptom === "heat" || answers.symptom === "sleep" || answers.symptom === "fog");
-    if(hormonalSymptom){
-      revealEl.hidden = false;
-      revealEl.innerHTML = "<b>This is very common during perimenopause</b> — the transition years before menopause. You're not imagining it.";
-    } else {
-      revealEl.hidden = true;
-    }
 
     var bridgeEl = document.getElementById("bridgeCard");
     bridgeEl.innerHTML = "<b>"+p.name+"</b> is your #1 trigger point — but one point is just the start. In <b>15 days</b>, combining it with the other points mapped to what you're feeling can mean deeper sleep, a calmer mind, and real relief.";
