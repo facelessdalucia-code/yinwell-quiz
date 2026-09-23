@@ -118,15 +118,15 @@ h1{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.9rem; line-heigh
 
   <!-- Intro -->
   <div class="stage active" data-stage="intro">
-    <div class="eyebrow">2-Minute Quiz</div>
+    <div class="eyebrow">30-Second Quiz</div>
     <h1>Which Acupressure Points Are Right for You?</h1>
-    <p class="sub">Answer 4 quick questions and get the exact points mapped to what you're feeling right now — based on Traditional Chinese Medicine.</p>
+    <p class="sub">Answer 1 quick question and get the exact point mapped to what you're feeling right now — based on Traditional Chinese Medicine.</p>
     <button class="big-cta" id="startBtn">Start the Quiz</button>
   </div>
 
   <!-- Q1 -->
   <div class="stage" data-stage="q1">
-    <div class="eyebrow">Question 1 of 4</div>
+    <div class="eyebrow">Just 1 question</div>
     <div class="q-title">What's bothering you the most lately?</div>
     <div class="options" data-q="symptom">
       <button class="opt" data-value="sleep">Sleep</button>
@@ -138,42 +138,6 @@ h1{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.9rem; line-heigh
     <div class="nav-row"><button class="back-btn" data-back="intro">← Back</button><span></span></div>
   </div>
 
-  <!-- Q2 -->
-  <div class="stage" data-stage="q2">
-    <div class="eyebrow">Question 2 of 4</div>
-    <div class="q-title">How long has this been going on?</div>
-    <div class="options" data-q="duration">
-      <button class="opt" data-value="weeks">A few weeks</button>
-      <button class="opt" data-value="months">A few months</button>
-      <button class="opt" data-value="year">Over a year</button>
-    </div>
-    <div class="nav-row"><button class="back-btn" data-back="q1">← Back</button><span></span></div>
-  </div>
-
-  <!-- Q3 -->
-  <div class="stage" data-stage="q3">
-    <div class="eyebrow">Question 3 of 4</div>
-    <div class="q-title">What's your age range?</div>
-    <div class="options" data-q="age">
-      <button class="opt" data-value="under35">Under 35</button>
-      <button class="opt" data-value="35-44">35-44</button>
-      <button class="opt" data-value="45-55">45-55</button>
-      <button class="opt" data-value="55plus">55+</button>
-    </div>
-    <div class="nav-row"><button class="back-btn" data-back="q2">← Back</button><span></span></div>
-  </div>
-
-  <!-- Q4 -->
-  <div class="stage" data-stage="q4">
-    <div class="eyebrow">Question 4 of 4</div>
-    <div class="q-title">How much is this affecting your daily life?</div>
-    <div class="options" data-q="impact">
-      <button class="opt" data-value="little">A little</button>
-      <button class="opt" data-value="lot">Quite a bit</button>
-      <button class="opt" data-value="takeover">It's taking over</button>
-    </div>
-    <div class="nav-row"><button class="back-btn" data-back="q3">← Back</button><span></span></div>
-  </div>
 
   <!-- Result -->
   <div class="stage" data-stage="result">
@@ -185,6 +149,7 @@ h1{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.9rem; line-heigh
       <div class="result-point" id="resultPointName">—</div>
       <div class="result-loc" id="resultPointLoc">—</div>
       <p class="result-desc" id="resultPointDesc">—</p>
+      <p class="result-desc" style="margin-top:12px"><b>Try it now:</b> press firmly with your fingertip for 60 seconds while breathing slowly. Repeat on both sides.</p>
     </div>
 
     <div class="reveal-card" id="revealCard" hidden></div>
@@ -201,7 +166,7 @@ h1{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.9rem; line-heigh
       <div class="timer-label">Price held for</div>
       <div class="timer" id="timer">05:00</div>
       <ul class="included">
-        <li><span class="mark">·</span> Your 15-day combination plan, built from your answers</li>
+        <li><span class="mark">·</span> Your 15-day combination plan, built around your #1 point</li>
         <li><span class="mark">·</span> All 15 points — location + function, with how-to photos</li>
         <li><span class="mark">·</span> Daily streak tracker, 1-3 minutes a day, no equipment</li>
       </ul>
@@ -232,7 +197,7 @@ h1{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.9rem; line-heigh
   beacon("landed");
 
   var answers = {};
-  var order = ["intro","q1","q2","q3","q4","result"];
+  var order = ["intro","q1","result"];
 
   var POINTS = {
     sleep:{name:"Taiyang", loc:"Temple", desc:"Calms the mind and nervous system, easing insomnia and racing thoughts before bed."},
@@ -289,17 +254,16 @@ h1{font-family:"Yuji Syuku",serif; font-weight:400; font-size:1.9rem; line-heigh
     document.getElementById("resultHeadline").textContent = headline;
 
     var revealEl = document.getElementById("revealCard");
-    var isMidlife = (answers.age === "35-44" || answers.age === "45-55");
     var hormonalSymptom = (answers.symptom === "heat" || answers.symptom === "sleep" || answers.symptom === "fog");
-    if(isMidlife && hormonalSymptom && (answers.duration === "months" || answers.duration === "year")){
+    if(hormonalSymptom){
       revealEl.hidden = false;
-      revealEl.innerHTML = "<b>This combination is common during perimenopause</b> — the transition years before menopause, when symptoms like this often show up before periods even change. You're not imagining it.";
+      revealEl.innerHTML = "<b>This is very common during perimenopause</b> — the transition years before menopause. You're not imagining it.";
     } else {
       revealEl.hidden = true;
     }
 
     var bridgeEl = document.getElementById("bridgeCard");
-    bridgeEl.innerHTML = "<b>"+p.name+"</b> is your #1 trigger point — but on its own, one point rarely tells the whole story. In just <b>15 days</b>, combining it with a few more points mapped to your answers can mean deeper sleep, a calmer mind, and real relief.";
+    bridgeEl.innerHTML = "<b>"+p.name+"</b> is your #1 trigger point — but one point is just the start. In <b>15 days</b>, combining it with the other points mapped to what you're feeling can mean deeper sleep, a calmer mind, and real relief.";
 
     beacon("result_shown", p.name);
   }
