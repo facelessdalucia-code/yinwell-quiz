@@ -1,6 +1,15 @@
 (function () {
   var V = window.YW_VARIANT;
-  if (V !== "a" && V !== "b") return;
+  if (V !== "a" && V !== "b") {
+    var m = null;
+    try {
+      m = new URLSearchParams(location.search).get("m");
+      if (m && /^[1-4]$/.test(m)) sessionStorage.setItem("yw_m", m);
+      else m = sessionStorage.getItem("yw_m");
+    } catch (e) {}
+    if (!m || !/^[1-4]$/.test(m)) return;
+    V = "m" + m;
+  }
   var URL = "https://ig-bot-yinwell.onrender.com/t";
   var sid;
   try {
