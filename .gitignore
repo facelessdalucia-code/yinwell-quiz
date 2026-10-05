@@ -1,2 +1,9 @@
 a/
 b/
+.secrets.local
+
+guide/
+files/
+worker/
+catalogo.json
+stripe_catalogo.py

@@ -1,6 +1,11 @@
 (function () {
   var V = window.YW_VARIANT;
-  if (V !== "a" && V !== "b") {
+  try {  // teste quiz × página (05/10): quem veio da DM com ?x=tq conta como "tq"
+    var x = new URLSearchParams(location.search).get("x");
+    if (x === "tq") sessionStorage.setItem("yw_x", "tq");
+    if (sessionStorage.getItem("yw_x") === "tq") V = "tq";
+  } catch (e) {}
+  if (V !== "a" && V !== "b" && V !== "tq") {
     var m = null;
     try {
       m = new URLSearchParams(location.search).get("m");
@@ -23,7 +28,7 @@
   }
 
   var G = null;
-  if (V.charAt(0) === "m") {
+  if (V.charAt(0) === "m" || V === "tq") {
     try {
       G = localStorage.getItem("yw_layout");
       if (G !== "intro" && G !== "direct") {
